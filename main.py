@@ -16,23 +16,38 @@ def app_Screen():
     customtkinter.set_appearance_mode("dark")
     customtkinter.set_default_color_theme("dark-blue")
 
+
+def frame():
     
-def submit():
+    frame_1 = customtkinter.CTkFrame(window, width=710, height=720, fg_color="white")
+    frame_1.place(x=990, y=360, anchor="center")
+
+    
+def get_user():
     global widget
     
     if widget:
         registered_text.destroy()
+        email_entry.delete(0,  len(email_entry.get()))
         widget = False
     else:
         registered_Text()
+        clear_Data()
 
         dados["email"] = email_entry.get()
         dados["senha"] = password_entry.get()
 
         lista_dados.append(dados.copy())
-        print(lista_dados)
-        print(len(lista_dados))
-     
+        
+        
+def clear_Data():
+    
+    email_entry.delete(0,  len(email_entry.get()))
+    password_entry.delete(0, len(password_entry.get()))
+
+
+
+
 
 def img_World():
 
@@ -50,16 +65,21 @@ def img_Person():
     img_label.place(relx=0.25, rely=0.37, anchor="center")
 
 
-def frame():
-    
-    frame_1 = customtkinter.CTkFrame(window, width=710, height=720, fg_color="white")
-    frame_1.place(x=990, y=360, anchor="center")
 
+def registered_Text():
+    global registered_text, widget
+    
+    widget = True
+    
+    registered_text = customtkinter.CTkLabel(window, text="Registrado com sucesso!", font=("Roboto", 15), text_color="lightgreen")
+    registered_text.place(relx=0.17, rely=0.87)  
+    
 
 def text_Section():
 
     text_label = customtkinter.CTkLabel(window, text="Crie ou entre na sua conta.", font=("Roboto", 40), text_color=("white"))
     text_label.place(relx=0.06, rely=0.1)
+
 
 
 def login_Button():
@@ -71,19 +91,11 @@ def login_Button():
 def register_Button():
     
         
-    register_btn = customtkinter.CTkButton(window, text="Cadastrar", font=("Roboto", 17), command=submit, width=220, bg_color="transparent",
+    register_btn = customtkinter.CTkButton(window, text="Cadastrar", font=("Roboto", 17), command=get_user, width=220, bg_color="transparent",
                                            corner_radius=20)
     register_btn.place(relx=0.25, rely=0.81, anchor="center")
 
 
-def registered_Text():
-    global registered_text, widget
-    
-    widget = True
-    
-    registered_text = customtkinter.CTkLabel(window, text="Registrado com sucesso!", font=("Roboto", 15), text_color="lightgreen")
-    registered_text.place(relx=0.17, rely=0.87)  
-    
 
 def email_Input():
     
@@ -91,13 +103,14 @@ def email_Input():
 
     email_entry = customtkinter.CTkEntry(window, placeholder_text="Seu email", width=250, corner_radius=20)
     email_entry.place(relx=0.25, rely=0.55, anchor="center")
- 
+      
     
 def password_Input():
     global password_entry
 
     password_entry = customtkinter.CTkEntry(window, placeholder_text="Sua senha", width=250, corner_radius=20, show="*")
     password_entry.place(relx=0.25, rely=0.6, anchor="center")
+
 
 
 def account_Checkbox():
