@@ -7,7 +7,7 @@ lista_dados = []
 
 
 def app_Screen():
-    global window, dados, lista_dados
+    global window
     
     window = customtkinter.CTk()
     window.geometry("1280x720")
@@ -28,24 +28,22 @@ def get_user():
     
     if widget:
         registered_text.destroy()
-        email_entry.delete(0,  len(email_entry.get()))
         widget = False
     else:
         registered_Text()
-        clear_Data()
-
+        
         dados["email"] = email_entry.get()
         dados["senha"] = password_entry.get()
 
         lista_dados.append(dados.copy())
+        print(lista_dados)
         
+        clear_Data()
         
 def clear_Data():
     
     email_entry.delete(0,  len(email_entry.get()))
     password_entry.delete(0, len(password_entry.get()))
-
-
 
 
 
