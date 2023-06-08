@@ -6,55 +6,53 @@ dados = {}
 lista_dados = []
 
 
-
-def delete_LoginFrame():
-
-    frame_login.destroy()
- 
- 
 def get_user():
-    global widget
+    global widget, registered_text
     
+    
+    def registered_Text():
+        widget = True
+        
+        registered_text = customtkinter.CTkLabel(frame_login, text="Registrado com sucesso!", font=("Roboto", 15), text_color="lightgreen")
+        registered_text.place(relx=0.43, rely=0.87)  
+        
+           
     if widget:
         registered_text.destroy()
         widget = False
     else:
         registered_Text()
         
-        dados["email"] = email_entry.get()
-        dados["senha"] = password_entry.get()
 
         lista_dados.append(dados.copy())
         print(lista_dados)
         
         clear_Data()
-            
         
+    registered_Text()
+            
+     
 def clear_Data():
         
     email_entry.delete(0,  len(email_entry.get()))
     password_entry.delete(0, len(password_entry.get()))
 
 
+def delete_LoginFrame():
 
-def planeta_Frame():
+    frame_login.destroy()
+    cadastro_Frame()
     
     
-    frame_planeta = customtkinter.CTkFrame(window, width=710, height=720, fg_color="white")
-    frame_planeta.place(x=990, y=360, anchor="center")
+def delete_CadastroFrame():
     
+    dados["email"] = email_cadastro.get()
+    dados["senha"] = senha_cadastro.get()
+    
+    frame_cadastro.destroy()
+    login_Frame()
+    get_user()
         
-        
-    def img_Planeta():
-    
-        img1 = Image.open("img/planeta.png").resize((650, 650),Image.ANTIALIAS)
-        img_tk = ImageTk.PhotoImage(img1)
-        img_label = customtkinter.CTkLabel(master=frame_planeta, image=img_tk, text="", bg_color="white")
-        img_label.place(relx=0.5, rely=0.45, anchor="center")   
-
-   
-    img_Planeta()
-   
 
 def login_Frame():
     global frame_login
@@ -124,6 +122,75 @@ def login_Frame():
     account_Checkbox()        
 
 
+def cadastro_Frame():
+    global frame_cadastro
+    
+    
+    frame_cadastro = customtkinter.CTkFrame(window, width=710, height=720)
+    frame_cadastro.place(x=290, y=360, anchor="center")
+    
+    
+    def text_Cadastro(): 
+        
+        text_label = customtkinter.CTkLabel(frame_cadastro, text="Cadastro", text_color="white", font=("Roboto", 40))
+        text_label.place(relx=0.55, rely=0.15, anchor="center")
+        
+        
+    def cadastro_Entry():
+        global email_cadastro, senha_cadastro
+        
+        email_cadastro = customtkinter.CTkEntry(frame_cadastro, placeholder_text="Email", width=250, corner_radius=20)
+        email_cadastro.place(relx=0.37, rely=0.35)
+        
+        senha_cadastro = customtkinter.CTkEntry(frame_cadastro, placeholder_text="Senha", width=250, corner_radius=20, show="*")
+        senha_cadastro.place(relx=0.37, rely=0.4)
+        
+        confirmarsenha_cadastro = customtkinter.CTkEntry(frame_cadastro, placeholder_text="Confirmar senha", width=250, corner_radius=20, show="*")
+        confirmarsenha_cadastro.place(relx=0.37, rely=0.45)
+        
+        
+    def cadastrar_Button():
+        
+        cadastrar_btn = customtkinter.CTkButton(frame_cadastro, text="Criar conta", command=delete_CadastroFrame, font=("Roboto", 15))
+        cadastrar_btn.place(relx=0.43, rely=0.55)
+        
+        
+        
+    
+    text_Cadastro()
+    cadastrar_Button()
+    cadastro_Entry()
+
+
+def planeta_Frame():
+    
+    
+    frame_planeta = customtkinter.CTkFrame(window, width=710, height=720, fg_color="white")
+    frame_planeta.place(x=990, y=360, anchor="center")
+    
+        
+        
+    def img_Planeta():
+    
+        img1 = Image.open("img/planeta.png").resize((650, 650),Image.ANTIALIAS)
+        img_tk = ImageTk.PhotoImage(img1)
+        img_label = customtkinter.CTkLabel(master=frame_planeta, image=img_tk, text="", bg_color="white")
+        img_label.place(relx=0.5, rely=0.45, anchor="center")   
+
+   
+    img_Planeta()
+
+
+
+
+
+
+
+
+
+
+
+
 def main_Screen():
     global email_entry, password_entry
     
@@ -138,13 +205,7 @@ def main_Screen():
         customtkinter.set_default_color_theme("dark-blue")
 
 
-    def registered_Text():
-        global registered_text, widget
-        
-        widget = True
-        
-        registered_text = customtkinter.CTkLabel(window, text="Registrado com sucesso!", font=("Roboto", 15), text_color="lightgreen")
-        registered_text.place(relx=0.17, rely=0.87)  
+    
         
     
 
