@@ -181,16 +181,6 @@ def planeta_Frame():
     img_Planeta()
 
 
-
-
-
-
-
-
-
-
-
-
 def main_Screen():
     global email_entry, password_entry
     
